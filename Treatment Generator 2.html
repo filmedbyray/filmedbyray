@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treatment Generator with Image References</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 700px; margin: 20px auto; padding: 20px; }
+        h1 { color: #333; text-align: center; }
+        label { display: block; margin-top: 10px; }
+        input, textarea, select { width: 100%; padding: 10px; margin-top: 5px; }
+        button { padding: 10px 20px; margin-top: 20px; width: 100%; background-color: #007BFF; color: #fff; border: none; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        #treatment-output { margin-top: 20px; white-space: pre-wrap; border-top: 1px solid #ddd; padding-top: 20px; }
+        .image-container img { width: 100%; max-height: 200px; margin-top: 10px; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>Film & Music Video Treatment Generator with Image References</h1>
+    <form id="treatment-form">
+        <label for="title">Project Title:</label>
+        <input type="text" id="title" required>
+
+        <label for="keywords">Keywords or Themes (comma-separated):</label>
+        <input type="text" id="keywords" required>
+
+        <label for="visualStyle">Visual Style (e.g., dark, cinematic, bright):</label>
+        <input type="text" id="visualStyle" required>
+
+        <label for="tone">Tone (e.g., intense, playful, nostalgic):</label>
+        <input type="text" id="tone" required>
+
+        <label for="audience">Target Audience:</label>
+        <input type="text" id="audience" required>
+
+        <label for="imageUrl">Reference Image URL (optional):</label>
+        <input type="url" id="imageUrl" placeholder="https://example.com/image.jpg">
+
+        <button type="button" onclick="generateTreatment()">Generate Treatment</button>
+    </form>
+
+    <div id="treatment-output"></div>
+
+    <script>
+        function generateTreatment() {
+            const title = document.getElementById("title").value;
+            const keywords = document.getElementById("keywords").value;
+            const visualStyle = document.getElementById("visualStyle").value;
+            const tone = document.getElementById("tone").value;
+            const audience = document.getElementById("audience").value;
+            const imageUrl = document.getElementById("imageUrl").value;
+
+            const scenes = [
+                "A close-up shot of the main character",
+                "An aerial view of the landscape",
+                "A fast-paced montage of key moments",
+                "A dramatic confrontation",
+                "A peaceful reflection moment",
+                "An intense chase scene",
+                "The main character’s realization",
+                "A powerful music drop",
+                "The peak of emotional intensity"
+            ];
+
+            const randomScene1 = scenes[Math.floor(Math.random() * scenes.length)];
+            const randomScene2 = scenes[Math.floor(Math.random() * scenes.length)];
+            const randomScene3 = scenes[Math.floor(Math.random() * scenes.length)];
+
+            let treatment = `
+Project Title: ${title}
+
+Synopsis:
+A captivating film/music video based on themes like ${keywords}. This project will take the audience on an emotional journey that explores these core ideas and delivers a memorable visual experience.
+
+Visual Style:
+This treatment will have a ${visualStyle} visual style, using lighting, colors, and framing to emphasize the key themes. The approach will blend ${visualStyle} aesthetics to create a unique atmosphere that resonates with the audience.
+
+Tone:
+The tone will be ${tone}, designed to evoke a specific emotional response and pull viewers into the project. This will set the mood and create a lasting impression.
+
+Key Scenes and Moments:
+- Opening scene: ${randomScene1}
+- Middle sequence: ${randomScene2}
+- Climax scene: ${randomScene3}
+
+Target Audience:
+This project is intended for ${audience}. It will engage them through relatable themes, an appealing visual style, and a tone that speaks to their interests.
+
+Closing Remarks:
+This treatment combines unique keywords like ${keywords} with a ${visualStyle} aesthetic and a ${tone} tone to captivate the intended audience.
+            `;
+
+            if (imageUrl) {
+                treatment += `\n\nReference Image:\n<img src="${imageUrl}" alt="Reference Image" class="reference-image">`;
+            }
+
+            document.getElementById("treatment-output").innerHTML = treatment;
+
+            if (imageUrl) {
+                const imgElement = document.createElement("img");
+                imgElement.src = imageUrl;
+                imgElement.alt = "Reference Image";
+                imgElement.classList.add("reference-image");
+                document.getElementById("treatment-output").appendChild(imgElement);
+            }
+        }
+    </script>
+</body>
+</html>
